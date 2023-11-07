@@ -11,14 +11,14 @@ function App() {
     },
     {
       id: 2,
-      title: "리액트 투두",
-      contents: "투두 만들기",
-      isDone: false,
+      title: "리액트 투두22",
+      contents: "투두 만들기2",
+      isDone: true,
     },
     {
       id: 3,
-      title: "리액트 투두",
-      contents: "투두 만들기",
+      title: "리액트 투두33",
+      contents: "투두 만들기3",
       isDone: false,
     }),
   ]);
@@ -43,20 +43,19 @@ function App() {
     setTodo(newTodo);
   };
 
-  const workingTodo = function () {
-    const working = todo.filter(function (item) {
-      return !item.isDone;
-    });
-  };
-  const doneTodo = function () {
-    const doneTodo = todo.filter(function (item) {
-      return item.isDone;
-    });
-  };
+  const workingTodo = todo.filter(function (item) {
+    return !item.isDone;
+  });
+
+  const doneTodo = todo.filter(function (item) {
+    return item.isDone;
+  });
+
   return (
     <div className="App">
       <header>To do List</header>
       <main>
+        제목{" "}
         <input
           type="text"
           value={title}
@@ -64,7 +63,8 @@ function App() {
             setTitle(event.target.value);
           }}
         />
-
+        <br />
+        내용{" "}
         <input
           type="text"
           value={text}
@@ -72,29 +72,30 @@ function App() {
             setText(event.target.value);
           }}
         />
-
+        <br />
         <button onClick={addBtn}>추가하기</button>
-
         <section>
           <h3>Working</h3>
-          {todo.map(function (item) {
+          {workingTodo.map(function (item) {
             return (
-              <div key={item.id}>
+              <div>
                 <h4>{item.title}</h4>
                 <p>{item.contents}</p>
                 <button onClick={() => deleteBtn(item.id)}>삭제</button>
+                <button>완료</button>
               </div>
             );
           })}
         </section>
         <section>
           <h3>Done</h3>
-          {todo.map(function (item) {
+          {doneTodo.map(function (item) {
             return (
-              <div key={item.id}>
+              <div>
                 <h4>{item.title}</h4>
                 <p>{item.contents}</p>
                 <button onClick={() => deleteBtn(item.id)}>삭제</button>
+                <button>취소</button>
               </div>
             );
           })}
